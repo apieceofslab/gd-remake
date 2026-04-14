@@ -1,0 +1,22 @@
+export function updatePhysics(player, state) {
+  const GRAVITY = 0.9;
+  const JUMP = -14;
+  const SPEED = 8;
+
+  player.vy += GRAVITY;
+  player.y += player.vy;
+  player.x += SPEED;
+
+  if (player.y > 500) {
+    player.y = 500;
+    player.vy = 0;
+    player.grounded = true;
+  }
+
+  if (window.isPressing && player.grounded) {
+    player.vy = JUMP;
+    player.grounded = false;
+  }
+
+  state.cameraX = player.x - 200;
+}
