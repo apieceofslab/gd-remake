@@ -1,0 +1,7 @@
+export function initEditor(state) {
+  window.addEventListener('keydown', e => {
+    if (e.key === 'e') {
+      alert("Editor toggle coming next upgrade 👀");
+    }
+  });
+}
