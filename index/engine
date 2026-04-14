@@ -1,0 +1,9 @@
+export class Player {
+  constructor() {
+    this.x = 0;
+    this.y = 300;
+    this.vy = 0;
+    this.size = 40;
+    this.grounded = false;
+  }
+}
