@@ -1,0 +1,4 @@
+export function initAudio() {
+  window.jumpSfx = new Audio('assets/jump.mp3');
+  window.deathSfx = new Audio('assets/death.mp3');
+}
