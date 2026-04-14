@@ -1,0 +1,49 @@
+import { Player } from './engine/player.js';
+import { updatePhysics } from './engine/physics.js';
+import { draw } from './engine/renderer.js';
+import { initEditor } from './engine/editor.js';
+import { initAudio } from './engine/audio.js';
+
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+let state = {
+  started: false,
+  paused: false,
+  lowQuality: false,
+  levelData: [],
+  cameraX: 0,
+  cameraY: 0,
+  deaths: 0
+};
+
+const player = new Player();
+
+initEditor(state);
+initAudio();
+
+window.startGame = () => {
+  state.started = true;
+  document.getElementById('start-screen').style.display = 'none';
+};
+
+window.togglePause = () => {
+  state.paused = !state.paused;
+  document.getElementById('pause-overlay').style.display =
+    state.paused ? 'flex' : 'none';
+};
+
+function loop() {
+  if (state.started && !state.paused) {
+    updatePhysics(player, state);
+  }
+
+  draw(ctx, player, state);
+
+  requestAnimationFrame(loop);
+}
+
+loop();
